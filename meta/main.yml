@@ -43,7 +43,7 @@ galaxy_info:
   #   - 99.99
   platform:
     - name: CentOS
-      version:
+      versions:
       - 7
 
   galaxy_tags:
