@@ -1,0 +1,7 @@
+---
+node_version: '0.10.30'
+node_tar_name: 'node-v{{ node_version }}.tar.gz'
+node_download_url: 'http://nodejs.org/dist/v{{ node_version }}/{{ node_tar_name }}'
+install_node_path: '/opt'
+
+required_packages: ['gcc', 'gcc-c++', 'vim']

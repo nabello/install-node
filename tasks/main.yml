@@ -1,0 +1,43 @@
+---
+# Install Required packages
+- name: Node - Install Required packages
+  package: name={{item}} state=latest
+  register: install_required_packages
+  with_items: "{{ required_packages }}"
+  tags:
+      - node_install_required_packages
+
+
+# Download tar
+- name: Node - Download tar
+  get_url:
+    url: "{{ node_download_url }}"
+    dest: /opt
+  register: download_node_tar
+  tags:
+      - node_download_tar
+
+
+# Extract tar
+- name: Node - Extract tar
+  unarchive:
+    src: "/{{ install_node_path }}/{{ node_tar_name }}"
+    dest: "/{{ install_node_path }}"
+    remote_src: yes
+  tags:
+      - node_extract_tar
+
+
+# Configure
+- name: Node - Configure
+  command: chdir="/{{ install_node_path }}/node-v{{ node_version }}" ./configure
+
+
+# Make
+- name: Node - Make
+  command: chdir="/{{ install_node_path }}/node-v{{ node_version }}" make
+
+
+# Make install
+- name: Node - Make Install
+  command: chdir="/{{ install_node_path }}/node-v{{ node_version }}" make install
